@@ -1,0 +1,57 @@
+{
+  "name": "resting-lanczos",
+  "version": "0.1.0",
+  "description": "Crisp responsive images: offline Lanczos tiers + srcset + transform motion + optional WebGL mipmaps. Not live Lanczos every frame.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./mipmap-drawer": "./src/mipmap-drawer.js"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "docs",
+    "experimental",
+    "demo",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "PROPOSAL.md"
+  ],
+  "scripts": {
+    "demo": "pnpm exec serve demo -p 5173",
+    "generate": "python scripts/generate-tiers.py",
+    "generate:node": "node scripts/generate-tiers.mjs"
+  },
+  "keywords": [
+    "lanczos",
+    "srcset",
+    "responsive-images",
+    "mipmap",
+    "webgl2",
+    "image-quality",
+    "transform-scale",
+    "prebake"
+  ],
+  "author": "AMDphreak",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AMDphreak/resting-lanczos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AMDphreak/resting-lanczos/issues"
+  },
+  "homepage": "https://github.com/AMDphreak/resting-lanczos#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

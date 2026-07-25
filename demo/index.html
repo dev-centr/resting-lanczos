@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>resting-lanczos demo — srcset + transform</title>
+    <style>
+      :root {
+        --bg: #1a1814;
+        --panel: #2a2620;
+        --text: #f2ebe0;
+        --muted: #b5a994;
+        --accent: #c4a574;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: radial-gradient(1200px 600px at 20% -10%, #3a3228, var(--bg));
+        color: var(--text);
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: clamp(1.6rem, 4vw, 2.1rem);
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.55;
+        margin: 0 0 1.5rem;
+      }
+      code {
+        font-size: 0.9em;
+        color: var(--accent);
+      }
+      .card {
+        background: var(--panel);
+        border-radius: 1.5rem;
+        padding: 0.75rem;
+        max-width: 24rem;
+        box-shadow: 0 12px 40px rgb(0 0 0 / 0.35);
+      }
+      .frame {
+        overflow: hidden;
+        border-radius: 1.1rem;
+        aspect-ratio: 4 / 3;
+        background: #111;
+      }
+      .frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        transform-origin: top center;
+        transition: transform 0.7s ease-out;
+      }
+      .card:hover .frame img {
+        transform: scale(1.03);
+      }
+      .meta {
+        margin-top: 1.75rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .meta a {
+        color: var(--accent);
+      }
+      .note {
+        margin-top: 1rem;
+        padding: 0.85rem 1rem;
+        border-left: 3px solid var(--accent);
+        background: rgb(0 0 0 / 0.25);
+        font-size: 0.88rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>resting-lanczos</h1>
+      <p>
+        Canonical demo: <strong>Lanczos tiers</strong> via
+        <code>srcset</code>/<code>sizes</code>, hover via
+        <code>transform: scale(1.03)</code>. No WebGL mipmaps.
+      </p>
+
+      <article class="card" aria-label="Sample product card">
+        <div class="frame">
+          <!--
+            Replace sample-tiers/* with your generate-tiers.py output.
+            sizes ≈ 24rem card; 400w / 800w = 1× / 2×.
+          -->
+          <img
+            src="sample-tiers/demo-800.webp"
+            srcset="sample-tiers/demo-400.webp 400w, sample-tiers/demo-800.webp 800w"
+            sizes="min(24rem, 90vw)"
+            width="800"
+            height="600"
+            alt="Sample Lanczos tier screenshot"
+          />
+        </div>
+      </article>
+
+      <p class="note">
+        Hover the card. Layout size stays fixed; only a CSS transform runs.
+        Generate real tiers with
+        <code>python scripts/generate-tiers.py --input master.png --id demo --out-dir demo/sample-tiers</code>.
+      </p>
+
+      <p class="meta">
+        Docs:
+        <a href="../docs/explanation.md">Explanation</a> ·
+        <a href="../docs/how-to.md">How-to</a> ·
+        <a href="../PROPOSAL.md">Browser proposal</a>
+        <br />
+        Experimental mipmaps (often blurrier text):
+        <a href="../experimental/README.md">experimental/</a>
+      </p>
+    </main>
+  </body>
+</html>
