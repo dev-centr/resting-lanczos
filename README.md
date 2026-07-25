@@ -2,6 +2,8 @@
 
 **Crisp responsive images without fighting the browser every animation frame.**
 
+Owned by **[dev-centr](https://github.com/dev-centr)** · Live comparison: **[devcentr.org/resting-lanczos](https://devcentr.org/resting-lanczos)**
+
 Prebake **Lanczos3** display tiers → serve them with **`srcset` / `sizes`** → animate with **`transform: scale()`** (layout size stays fixed). That is the whole strategy.
 
 Optional WebGL mipmaps + sharpen live under `experimental/` and are **not recommended** for UI/screenshot cards (they often soften fine text).
@@ -72,13 +74,17 @@ pnpm generate:node -- --input path/to/master.png --id mycard --out-dir ./out
 
 ### Demo
 
+**Integrated comparison (recommended):** [devcentr.org/resting-lanczos](https://devcentr.org/resting-lanczos) — browser downscale of a 2400w master vs Lanczos `srcset` tiers + transform.
+
+Local static demo:
+
 ```bash
 pnpm install
 pnpm demo
 # open http://localhost:5173
 ```
 
-The demo uses committed sample tiers + CSS transform hover. No WebGL.
+The local demo uses committed sample tiers + CSS transform hover. No WebGL. Docs note: [docs.devcentr.org … resting-lanczos](https://docs.devcentr.org/home/tools/resting-lanczos.html).
 
 ## Package layout
 
@@ -90,7 +96,7 @@ docs/explanation.md         # Why browsers blur; full strategy
 docs/how-to.md              # Practical recipes
 PROPOSAL.md                 # What browsers / CSS could do better
 experimental/               # WebGL mipmap drawer — opt-in, see caveats
-demo/                       # Static HTML: srcset + transform
+demo/                       # Static HTML: srcset + transform (+ master for naive compare)
 ```
 
 ## Research notes (gaps vs existing tools)
@@ -112,7 +118,7 @@ See [`experimental/README.md`](experimental/README.md). Mipmapped sampling + lig
 
 ## Related
 
-Strategy first shipped in production on [amdphreak.github.io](https://github.com/AMDphreak/amdphreak.github.io) product showcase cards.
+Strategy first shipped in production on [amdphreak.github.io](https://github.com/AMDphreak/amdphreak.github.io) product showcase cards. Home org: [dev-centr](https://github.com/dev-centr).
 
 ## License
 

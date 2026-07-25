@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>resting-lanczos demo — srcset + transform</title>
+    <title>resting-lanczos demo — browser vs Lanczos srcset</title>
     <style>
       :root {
         --bg: #1a1814;
@@ -24,7 +24,7 @@
         padding: 2.5rem 1.25rem 4rem;
       }
       main {
-        max-width: 42rem;
+        max-width: 56rem;
         margin: 0 auto;
       }
       h1 {
@@ -42,12 +42,28 @@
         font-size: 0.9em;
         color: var(--accent);
       }
+      .grid {
+        display: grid;
+        gap: 1.75rem;
+      }
+      @media (min-width: 720px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
       .card {
         background: var(--panel);
         border-radius: 1.5rem;
         padding: 0.75rem;
         max-width: 24rem;
         box-shadow: 0 12px 40px rgb(0 0 0 / 0.35);
+      }
+      .label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+        margin: 0 0 0.5rem;
       }
       .frame {
         overflow: hidden;
@@ -64,7 +80,7 @@
         transform-origin: top center;
         transition: transform 0.7s ease-out;
       }
-      .card:hover .frame img {
+      .card:hover .frame img.zoom {
         transform: scale(1.03);
       }
       .meta {
@@ -88,36 +104,55 @@
     <main>
       <h1>resting-lanczos</h1>
       <p>
-        Canonical demo: <strong>Lanczos tiers</strong> via
-        <code>srcset</code>/<code>sizes</code>, hover via
+        Comparison: <strong>browser downscale</strong> of a 2400w master vs
+        <strong>Lanczos tiers</strong> via <code>srcset</code>/<code>sizes</code> +
         <code>transform: scale(1.03)</code>. No WebGL mipmaps.
+        Integrated page:
+        <a href="https://devcentr.org/resting-lanczos">devcentr.org/resting-lanczos</a>.
       </p>
 
-      <article class="card" aria-label="Sample product card">
-        <div class="frame">
-          <!--
-            Replace sample-tiers/* with your generate-tiers.py output.
-            sizes ≈ 24rem card; 400w / 800w = 1× / 2×.
-          -->
-          <img
-            src="sample-tiers/demo-800.webp"
-            srcset="sample-tiers/demo-400.webp 400w, sample-tiers/demo-800.webp 800w"
-            sizes="min(24rem, 90vw)"
-            width="800"
-            height="600"
-            alt="Sample Lanczos tier screenshot"
-          />
+      <div class="grid">
+        <div>
+          <p class="label">01 · Naive browser downscale</p>
+          <article class="card" aria-label="Naive browser downscale">
+            <div class="frame">
+              <img
+                src="sample-tiers/master-2400.webp"
+                width="2400"
+                height="1800"
+                alt="Huge master downscaled by the browser"
+              />
+            </div>
+          </article>
         </div>
-      </article>
+        <div>
+          <p class="label">02 · Lanczos srcset + transform</p>
+          <article class="card" aria-label="Lanczos srcset resting card">
+            <div class="frame">
+              <img
+                class="zoom"
+                src="sample-tiers/demo-800.webp"
+                srcset="sample-tiers/demo-400.webp 400w, sample-tiers/demo-800.webp 800w"
+                sizes="min(24rem, 90vw)"
+                width="800"
+                height="600"
+                alt="Lanczos tier screenshot via srcset"
+              />
+            </div>
+          </article>
+        </div>
+      </div>
 
       <p class="note">
-        Hover the card. Layout size stays fixed; only a CSS transform runs.
-        Generate real tiers with
+        Hover the right card. Layout size stays fixed; only a CSS transform runs.
+        Generate tiers with
         <code>python scripts/generate-tiers.py --input master.png --id demo --out-dir demo/sample-tiers</code>.
       </p>
 
       <p class="meta">
-        Docs:
+        Repo:
+        <a href="https://github.com/dev-centr/resting-lanczos">dev-centr/resting-lanczos</a>
+        · Docs:
         <a href="../docs/explanation.md">Explanation</a> ·
         <a href="../docs/how-to.md">How-to</a> ·
         <a href="../PROPOSAL.md">Browser proposal</a>

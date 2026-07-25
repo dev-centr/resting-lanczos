@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project uses [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-07-25
+
+### Changed
+
+- Repository transferred to [`dev-centr/resting-lanczos`](https://github.com/dev-centr/resting-lanczos).
+- README points at the integrated comparison demo on [devcentr.org/resting-lanczos](https://devcentr.org/resting-lanczos).
+- Sample demo assets refreshed with a high-detail chart plus `master-2400.webp` for naive browser-downscale comparisons.
+
 ## [0.1.0] - 2026-07-25
 
 ### Added

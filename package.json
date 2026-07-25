@@ -1,6 +1,6 @@
 {
   "name": "resting-lanczos",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Crisp responsive images: offline Lanczos tiers + srcset + transform motion + optional WebGL mipmaps. Not live Lanczos every frame.",
   "type": "module",
   "main": "./src/index.js",
@@ -38,12 +38,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AMDphreak/resting-lanczos.git"
+    "url": "https://github.com/dev-centr/resting-lanczos.git"
   },
   "bugs": {
-    "url": "https://github.com/AMDphreak/resting-lanczos/issues"
+    "url": "https://github.com/dev-centr/resting-lanczos/issues"
   },
-  "homepage": "https://github.com/AMDphreak/resting-lanczos#readme",
+  "homepage": "https://devcentr.org/resting-lanczos",
   "engines": {
     "node": ">=18"
   },
