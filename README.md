@@ -1,14 +1,43 @@
-# resting-lanczos
+<a id="readme-top"></a>
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![License][license-shield]][license-url]
+
+<div align="center">
+  <h1>resting-lanczos</h1>
+  <p>Crisp responsive images: offline Lanczos tiers + srcset + transform scale (no live Lanczos).</p>
+  <p>
+    <a href="https://devcentr.org/resting-lanczos">Live comparison</a>
+    ·
+    <a href="https://github.com/dev-centr/resting-lanczos/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/dev-centr/resting-lanczos/issues">Request Feature</a>
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+## About The Project
 
 **Crisp responsive images without fighting the browser every animation frame.**
-
-Owned by **[dev-centr](https://github.com/dev-centr)** · Live comparison: **[devcentr.org/resting-lanczos](https://devcentr.org/resting-lanczos)**
 
 Prebake **Lanczos3** display tiers → serve them with **`srcset` / `sizes`** → animate with **`transform: scale()`** (layout size stays fixed). That is the whole strategy.
 
 Optional WebGL mipmaps + sharpen live under `experimental/` and are **not recommended** for UI/screenshot cards (they often soften fine text).
 
-## Why this exists
+### Why this exists
 
 Browsers do **not** Lanczos-resample every CSS animation frame. Animating `width`/`height`, or stuffing a huge bitmap into a small card, typically uses bilinear/GPU filtering → soft or aliased results. There is **no CSS switch for Lanczos3**.
 
@@ -16,7 +45,7 @@ Browsers do **not** Lanczos-resample every CSS animation frame. Animating `width
 
 See [docs/explanation.md](docs/explanation.md) for the full problem statement and anti-patterns.
 
-## Canonical pipeline
+### Canonical pipeline
 
 | Step | What | Why |
 |------|------|-----|
@@ -25,7 +54,7 @@ See [docs/explanation.md](docs/explanation.md) for the full problem statement an
 | 3. Motion | `transform: scale()` on the image or a clipped wrapper | Layout size fixed → one crisp bitmap; subtle hover (~1.03–1.05) is fine |
 | 4. Resting resize only | Swap via srcset / `ResizeObserver` when **layout** size changes | Never Lanczos every frame; pica is for discrete resizes |
 
-## Quick start
+## Installation
 
 ### Generate tiers (Python + Pillow)
 
@@ -43,6 +72,8 @@ python scripts/generate-tiers.py --input path/to/master.png --id mycard --out-di
 pnpm install
 pnpm generate:node -- --input path/to/master.png --id mycard --out-dir ./out
 ```
+
+## Usage
 
 ### Markup + hover
 
@@ -86,7 +117,7 @@ pnpm demo
 
 The local demo uses committed sample tiers + CSS transform hover. No WebGL. Docs note: [docs.devcentr.org … resting-lanczos](https://docs.devcentr.org/home/tools/resting-lanczos.html).
 
-## Package layout
+### Package layout
 
 ```
 scripts/generate-tiers.py   # Lanczos tier CLI (Pillow)
@@ -99,7 +130,7 @@ experimental/               # WebGL mipmap drawer — opt-in, see caveats
 demo/                       # Static HTML: srcset + transform (+ master for naive compare)
 ```
 
-## Research notes (gaps vs existing tools)
+### Research notes (gaps vs existing tools)
 
 | Tool / feature | What it does | Gap vs this strategy |
 |----------------|--------------|----------------------|
@@ -112,11 +143,11 @@ demo/                       # Static HTML: srcset + transform (+ master for naiv
 
 **Conclusion:** Pieces exist; the **composed** resting-Lanczos + srcset + transform pipeline is not a standard library. That is what this repo publishes.
 
-## Experimental WebGL
+### Experimental WebGL
 
 See [`experimental/README.md`](experimental/README.md). Mipmapped sampling + light sharpen can look smoother on photos but often **blurs fine UI text** in product screenshots. Prefer plain `<img srcset>` of well-sized Lanczos assets for cards.
 
-## Related
+### Related
 
 Strategy first shipped in production on [amdphreak.github.io](https://github.com/AMDphreak/amdphreak.github.io) product showcase cards. Home org: [dev-centr](https://github.com/dev-centr).
 
@@ -127,3 +158,25 @@ Strategy first shipped in production on [amdphreak.github.io](https://github.com
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md).
+
+## Contact
+
+DevCentr.org - support@devcentr.org
+
+Project Link: https://github.com/dev-centr/resting-lanczos
+
+Site: https://devcentr.org/resting-lanczos
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/dev-centr/resting-lanczos.svg?style=for-the-badge
+[contributors-url]: https://github.com/dev-centr/resting-lanczos/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/dev-centr/resting-lanczos.svg?style=for-the-badge
+[forks-url]: https://github.com/dev-centr/resting-lanczos/network/members
+[stars-shield]: https://img.shields.io/github/stars/dev-centr/resting-lanczos.svg?style=for-the-badge
+[stars-url]: https://github.com/dev-centr/resting-lanczos/stargazers
+[issues-shield]: https://img.shields.io/github/issues/dev-centr/resting-lanczos.svg?style=for-the-badge
+[issues-url]: https://github.com/dev-centr/resting-lanczos/issues
+[license-shield]: https://img.shields.io/github/license/dev-centr/resting-lanczos.svg?style=for-the-badge
+[license-url]: https://github.com/dev-centr/resting-lanczos/blob/main/LICENSE
